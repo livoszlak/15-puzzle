@@ -22,3 +22,8 @@ export interface HelperFunctions {
   swap: (tile1: number, tile2: number) => void;
   shuffle: () => void;
 }
+
+export interface ButtonProps {
+  onClick: () => void;
+  children: React.ReactNode;
+}

@@ -1,38 +1,10 @@
-import { useState } from "react";
+// Board.tsx
 import Tile from "./Tile";
 import { constants } from "../constants/constants";
-import { canSwap, swap, shuffle } from "../helpers";
+import { useTiles } from "../hooks/useTiles";
 
 function Board() {
-  const [tiles, setTiles] = useState([...Array(constants.TILE_COUNT).keys()]);
-  const [solved, setIsSolved] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
-
-  const shuffleTiles = () => {
-    const shuffledTiles = shuffle(tiles);
-    setTiles(shuffledTiles);
-  };
-
-  const swapTiles = (tileIndex: number) => {
-    if (canSwap(tileIndex, tiles.length - 1)) {
-      const swappedTiles = swap(tiles, tileIndex, tiles.length - 1);
-      setTiles(swappedTiles);
-    }
-  };
-
-  const handleTileClick = (index: number) => {
-    swapTiles(index);
-  };
-
-  const handleShuffleClick = () => {
-    shuffleTiles();
-  };
-
-  const handleStartClick = () => {
-    shuffleTiles();
-    setIsStarted(true);
-    console.log("started");
-  };
+  const { tiles, handleTileClick, handleShuffleClick } = useTiles();
 
   const style = {
     width: constants.BOARD_SIZE,
@@ -53,11 +25,8 @@ function Board() {
           />
         ))}
       </ul>
-      {!isStarted ? (
-        <button onClick={() => handleStartClick}>Start game</button>
-      ) : (
-        <button onClick={() => handleShuffleClick}>Reshuffle</button>
-      )}
+
+      <button onClick={handleShuffleClick}>Reshuffle</button>
     </>
   );
 }

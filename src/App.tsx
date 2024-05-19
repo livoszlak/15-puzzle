@@ -1,11 +1,12 @@
-import { useState } from "react";
 import "./App.css";
 import { Box, Typography } from "@mui/material";
+import { useTiles } from "./hooks/useTiles";
 import Board from "./components/Board";
+import Header from "./components/Header";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const [moves, setMoves] = useState(0);
   return (
     <div className="App">
       <Box>
@@ -17,6 +18,7 @@ function App() {
         >
           15-puzzle
         </Typography>
+        <Header />
       </Box>
       <Board />
     </div>

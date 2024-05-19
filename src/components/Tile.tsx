@@ -20,6 +20,7 @@ function Tile(props) {
         height: tileStyle.height,
         transform: `translate3d(${tileStyle.translateX}px, ${tileStyle.translateY}px, 0)`,
         opacity: tile === constants.TILE_COUNT - 1 ? 0 : 1,
+        border: "1px solid black",
       }}
       className="tile"
       onClick={() => handleTileClick(index)}
