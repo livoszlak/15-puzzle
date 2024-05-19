@@ -1,4 +1,4 @@
-import { TILE_COUNT, GRID_SIZE } from "./constants/constants";
+import { constants } from "./constants/constants";
 
 interface MatrixPosition {
   row: number;
@@ -12,7 +12,7 @@ interface VisualPosition {
 
 export function isSolvable(tiles: number[]): boolean {
   let product: number = 1;
-  for (let i = 1, l = TILE_COUNT - 1; i <= l; i++) {
+  for (let i = 1, l = constants.TILE_COUNT - 1; i <= l; i++) {
     for (let j = i + 1, m = l + 1; j <= m; j++) {
       product *= (tiles[i - 1] - tiles[j - 1]) / (i - j);
     }
@@ -30,13 +30,13 @@ export function isSolved(tiles: number[]): boolean {
 }
 
 export function getIndex(row: string, col: string): number {
-  return parseInt(row, 10) * GRID_SIZE + parseInt(col, 10);
+  return parseInt(row, 10) * constants.GRID_SIZE + parseInt(col, 10);
 }
 
 export function getMatrixPosition(index: number): MatrixPosition {
   return {
-    row: Math.floor(index / GRID_SIZE),
-    col: index % GRID_SIZE,
+    row: Math.floor(index / constants.GRID_SIZE),
+    col: index % constants.GRID_SIZE,
   };
 }
 
@@ -52,7 +52,7 @@ export function getVisualPosition(
   };
 }
 
-export function shuffleTiles(tiles: number[]): number[] {
+export function shuffle(tiles: number[]): number[] {
   const shuffledTiles = [
     ...tiles
       .filter((t) => t !== tiles.length - 1)
@@ -61,5 +61,17 @@ export function shuffleTiles(tiles: number[]): number[] {
   ];
   return isSolvable(shuffledTiles) && !isSolved(shuffledTiles)
     ? shuffledTiles
-    : shuffleTiles(shuffledTiles);
+    : shuffle(shuffledTiles);
+}
+
+export function canSwap(src: number, dest: number) {
+  const { row: srcRow, col: srcCol } = getMatrixPosition(src);
+  const { row: destRow, col: destCol } = getMatrixPosition(dest);
+  return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
+}
+
+export function swap(tiles: number[], src: number, dest: number) {
+  const tilesResult = [...tiles];
+  [tilesResult[src], tilesResult[dest]] = [tilesResult[dest], tilesResult[src]];
+  return tilesResult;
 }

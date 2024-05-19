@@ -1,26 +1,64 @@
-import { Box } from "@mui/material";
 import { useState } from "react";
 import Tile from "./Tile";
-import {
-  TILE_COUNT,
-  GRID_SIZE,
-  BOARD_SIZE,
-  TILE_WIDTH,
-  TILE_HEIGHT,
-} from "../constants/constants";
+import { constants } from "../constants/constants";
+import { canSwap, swap, shuffle } from "../helpers";
 
 function Board() {
-  const [tiles, setTiles] = useState([...Array(TILE_COUNT).keys()]);
+  const [tiles, setTiles] = useState([...Array(constants.TILE_COUNT).keys()]);
+  const [solved, setIsSolved] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+
+  const shuffleTiles = () => {
+    const shuffledTiles = shuffle(tiles);
+    setTiles(shuffledTiles);
+  };
+
+  const swapTiles = (tileIndex: number) => {
+    if (canSwap(tileIndex, tiles.length - 1)) {
+      const swappedTiles = swap(tiles, tileIndex, tiles.length - 1);
+      setTiles(swappedTiles);
+    }
+  };
+
+  const handleTileClick = (index: number) => {
+    swapTiles(index);
+  };
+
+  const handleShuffleClick = () => {
+    shuffleTiles();
+  };
+
+  const handleStartClick = () => {
+    shuffleTiles();
+    setIsStarted(true);
+    console.log("started");
+  };
 
   const style = {
-    width: BOARD_SIZE,
-    height: BOARD_SIZE,
+    width: constants.BOARD_SIZE,
+    height: constants.BOARD_SIZE,
   };
 
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
-      <h1>Hi</h1>
-    </Box>
+    <>
+      <ul style={style} className="board">
+        {tiles.map((tile, index) => (
+          <Tile
+            key={tile}
+            index={index}
+            tile={tile}
+            width={constants.TILE_WIDTH}
+            height={constants.TILE_HEIGHT}
+            handleTileClick={handleTileClick}
+          />
+        ))}
+      </ul>
+      {!isStarted ? (
+        <button onClick={() => handleStartClick}>Start game</button>
+      ) : (
+        <button onClick={() => handleShuffleClick}>Reshuffle</button>
+      )}
+    </>
   );
 }
 
