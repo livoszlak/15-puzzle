@@ -2,9 +2,10 @@
 import Tile from "./Tile";
 import { constants } from "../constants/constants";
 import { useTiles } from "../hooks/useTiles";
+import { Typography } from "@mui/material";
 
 function Board() {
-  const { tiles, handleTileClick, handleShuffleClick } = useTiles();
+  const { tiles, handleTileClick, handleShuffleClick, moves } = useTiles();
 
   const style = {
     width: constants.BOARD_SIZE,
@@ -13,6 +14,14 @@ function Board() {
 
   return (
     <>
+      <Typography
+        variant="h4"
+        fontSize={"1rem"}
+        fontFamily={"Open Sans"}
+        sx={{ fontWeight: "400" }}
+      >
+        Moves: {moves}
+      </Typography>
       <ul style={style} className="board">
         {tiles.map((tile, index) => (
           <Tile
@@ -22,6 +31,7 @@ function Board() {
             width={constants.TILE_WIDTH}
             height={constants.TILE_HEIGHT}
             handleTileClick={handleTileClick}
+            gridSize={constants.GRID_SIZE}
           />
         ))}
       </ul>

@@ -9,16 +9,16 @@ export function useTiles() {
   const [isStarted, setIsStarted] = useState(false);
   const [moves, setMoves] = useState(0);
 
-  const shuffleTiles = () => {
+  const shuffleTiles = (): void => {
     setTiles((tiles) => {
       const shuffledTiles = shuffle([...tiles]);
       return shuffledTiles;
     });
   };
 
-  const swapTiles = (tileIndex: number) => {
+  const swapTiles = (tileIndex: number): void => {
     if (canSwap(tileIndex, tiles.indexOf(tiles.length - 1))) {
-      const swappedTiles = swap(
+      const swappedTiles: number[] = swap(
         tiles,
         tileIndex,
         tiles.indexOf(tiles.length - 1)
@@ -27,19 +27,17 @@ export function useTiles() {
     }
   };
 
-  const handleTileClick = (index: number) => {
+  const handleTileClick = (index: number): void => {
     swapTiles(index);
     setMoves((prevMoves) => prevMoves + 1);
-    console.log(moves);
   };
 
-  const handleShuffleClick = () => {
+  const handleShuffleClick = (): void => {
     shuffleTiles();
-    setMoves(1);
+    setMoves(0);
   };
 
-  const handleStartClick = () => {
-    console.log("started");
+  const handleStartClick = (): void => {
     shuffleTiles();
     setIsStarted(true);
   };

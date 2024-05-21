@@ -1,8 +1,17 @@
 import { getMatrixPosition, getVisualPosition } from "../helpers";
 import { constants } from "../constants/constants";
 
-function Tile(props) {
-  const { tile, index, width, height, handleTileClick } = props;
+type TileProps = {
+  tile: number;
+  index: number;
+  width: number;
+  height: number;
+  handleTileClick: (index: number) => void;
+  gridSize: number;
+};
+
+function Tile(props: TileProps) {
+  const { tile, index, width, height, handleTileClick, gridSize } = props;
 
   const { row, col } = getMatrixPosition(index);
   const visualPos = getVisualPosition(row, col, width, height);

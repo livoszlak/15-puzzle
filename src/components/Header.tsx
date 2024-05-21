@@ -1,8 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { useTiles } from "../hooks/useTiles";
+import { useState } from "react";
 
 export default function Header() {
-  const { moves } = useTiles();
+  const [moves, setMoves] = useState(0);
   return (
     <Box>
       <Typography
@@ -11,7 +12,7 @@ export default function Header() {
         fontFamily={"Open Sans"}
         sx={{ fontWeight: "400" }}
       >
-        {`Moves: ${moves}`}
+        How few moves can you solve the puzzle in?
       </Typography>
     </Box>
   );

@@ -6,7 +6,6 @@ import Header from "./components/Header";
 import { useState } from "react";
 
 function App() {
-  const [moves, setMoves] = useState(0);
   return (
     <div className="App">
       <Box>
