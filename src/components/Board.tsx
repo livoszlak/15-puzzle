@@ -1,10 +1,13 @@
-// Board.tsx
 import Tile from "./Tile";
-import { constants } from "../constants/constants";
+import { Constants } from "../types";
 import { useTiles } from "../hooks/useTiles";
 import { Typography } from "@mui/material";
 
-function Board() {
+interface BoardProps {
+  constants: Constants;
+}
+
+const Board: React.FC<BoardProps> = ({ constants }) => {
   const { tiles, handleTileClick, handleShuffleClick, moves } = useTiles();
 
   const style = {
@@ -39,6 +42,6 @@ function Board() {
       <button onClick={handleShuffleClick}>Reshuffle</button>
     </>
   );
-}
+};
 
 export default Board;

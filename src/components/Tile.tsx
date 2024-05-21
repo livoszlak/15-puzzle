@@ -15,6 +15,7 @@ function Tile(props: TileProps) {
 
   const { row, col } = getMatrixPosition(index);
   const visualPos = getVisualPosition(row, col, width, height);
+
   const tileStyle = {
     width: `calc(100% / ${constants.GRID_SIZE})`,
     height: `calc(100% / ${constants.GRID_SIZE})`,
