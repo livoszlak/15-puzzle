@@ -94,14 +94,49 @@ export function shuffle(tiles: number[]): number[] {
   return isSolvable(array) && !isSolved(array) ? array : shuffle(array);
 }
 
-export function canSwap(src: number, dest: number) {
-  const { row: srcRow, col: srcCol } = getMatrixPosition(src);
-  const { row: destRow, col: destCol } = getMatrixPosition(dest);
-  return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
-}
+/* export function canSwap(src: number, dest: number) {
+  let { row: srcRow, col: srcCol } = getMatrixPosition(src);
+  console.log("src:" + src);
 
-export function swap(tiles: number[], src: number, dest: number) {
+  let { row: destRow, col: destCol } = getMatrixPosition(dest);
+  console.log("dest:" + dest);
+
+  return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
+} */
+
+export const canSwap = (src: number, dest: number): boolean => {
+  const srcPos = getMatrixPosition(src);
+  const destPos = getMatrixPosition(dest);
+  return srcPos.row === destPos.row || srcPos.col === destPos.col;
+};
+
+export function swap(tiles: number[], src: number, dest: number): number[] {
+  const srcPos: MatrixPosition = getMatrixPosition(src);
+  const destPos: MatrixPosition = getMatrixPosition(dest);
+  const emptyTile = tiles.indexOf(constants.TILE_COUNT - 1);
+  const emptyPos = getMatrixPosition(emptyTile);
+
   const tilesResult = [...tiles];
-  [tilesResult[src], tilesResult[dest]] = [tilesResult[dest], tilesResult[src]];
+
+  if (srcPos.row === emptyPos.row) {
+    const direction = srcPos.col < emptyPos.col ? 1 : -1;
+    for (let i = emptyPos.col; i !== srcPos.col; i -= direction) {
+      const index = emptyPos.row * constants.GRID_SIZE + i;
+      const nextIndex = emptyPos.row * constants.GRID_SIZE + (i - direction);
+      tilesResult[index] = tilesResult[nextIndex];
+    }
+    tilesResult[emptyPos.row * constants.GRID_SIZE + srcPos.col] =
+      constants.TILE_COUNT - 1;
+  } else if (srcPos.col === emptyPos.col) {
+    const direction = srcPos.row < emptyPos.row ? 1 : -1;
+    for (let i = emptyPos.row; i !== srcPos.row; i -= direction) {
+      const index = i * constants.GRID_SIZE + emptyPos.col;
+      const nextIndex = (i - direction) * constants.GRID_SIZE + emptyPos.col;
+      tilesResult[index] = tilesResult[nextIndex];
+    }
+    tilesResult[srcPos.row * constants.GRID_SIZE + emptyPos.col] =
+      constants.TILE_COUNT - 1;
+  }
+
   return tilesResult;
 }

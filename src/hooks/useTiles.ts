@@ -1,4 +1,3 @@
-// useTiles.ts
 import { useState, useEffect } from "react";
 import { constants } from "../constants/constants";
 import { canSwap, swap, shuffle } from "../helpers";
