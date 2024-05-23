@@ -1,45 +1,40 @@
 import { useState, useEffect } from "react";
 import { Constants } from "../types";
-import { gridSize } from "../constants/constants";
+import { columns } from "../constants/constants";
 
 export function useConstants() {
   const [constants, setConstants] = useState<Constants>({
     TILE_COUNT: 16,
-    GRID_SIZE: gridSize,
-    BOARD_SIZE: 0,
+    COLUMNS: columns,
+    ROWS: 16 / columns,
     TILE_WIDTH: 0,
     TILE_HEIGHT: 0,
+    BOARD_HEIGHT: 0,
+    BOARD_WIDTH: 0,
   });
 
   useEffect(() => {
-    const handleResize = (): void => {
+    const handleResize = () => {
       const windowWidth = window.innerWidth;
-      const maxBoardSize = 500;
-      const maxTileSize = 127;
-      let boardSize = Math.round(windowWidth * 0.8);
+      const tileWidth = Math.min(
+        Math.round((windowWidth * 0.8) / constants.COLUMNS),
+        100
+      );
+      const tileHeight = tileWidth;
 
-      if (boardSize > maxBoardSize) {
-        boardSize = maxBoardSize;
-      }
-
-      const maxBoardSizeBasedOnGrid = gridSize * maxTileSize;
-
-      boardSize = Math.min(boardSize, maxBoardSizeBasedOnGrid);
-
-      setConstants({
-        TILE_COUNT: gridSize * gridSize,
-        GRID_SIZE: gridSize,
-        BOARD_SIZE: boardSize,
-        TILE_WIDTH: Math.round(boardSize / gridSize),
-        TILE_HEIGHT: Math.round(boardSize / gridSize),
-      });
+      setConstants((prevConstants) => ({
+        ...prevConstants,
+        TILE_WIDTH: tileWidth,
+        TILE_HEIGHT: tileHeight,
+        BOARD_WIDTH: tileWidth * constants.COLUMNS,
+      }));
     };
 
     window.addEventListener("resize", handleResize);
     handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [gridSize]);
+  }, [constants.COLUMNS]);
 
   return constants;
 }

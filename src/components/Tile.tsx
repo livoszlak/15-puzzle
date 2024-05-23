@@ -7,7 +7,7 @@ type TileProps = {
   width: number;
   height: number;
   handleTileClick: (index: number) => void;
-  gridSize: number;
+  /* gridSize: number; */
 };
 
 function Tile(props: TileProps) {
@@ -17,14 +17,14 @@ function Tile(props: TileProps) {
   const visualPos = getVisualPosition(row, col, width, height);
 
   const tileStyle = {
-    width: `calc(100% / ${constants.GRID_SIZE})`,
-    height: `calc(100% / ${constants.GRID_SIZE})`,
+    width: `${constants.TILE_WIDTH}px`,
+    height: `${constants.TILE_HEIGHT}px`,
     translateX: visualPos.x,
     translateY: visualPos.y,
   };
 
   return (
-    <li
+    <div
       style={{
         width: tileStyle.width,
         height: tileStyle.height,
@@ -38,7 +38,7 @@ function Tile(props: TileProps) {
       onClick={() => handleTileClick(index)}
     >
       {tile === constants.TILE_COUNT - 1 ? "" : tile + 1}
-    </li>
+    </div>
   );
 }
 

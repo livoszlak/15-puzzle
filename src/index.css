@@ -19,10 +19,14 @@
   --blank: #242424;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .App {
-  display: grid;
-  place-items: center;
-  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 body {
@@ -34,11 +38,17 @@ body {
   background-color: var(--light-blue);
 }
 
+.board-wrapper {
+}
+
 .board {
   position: relative;
   padding: 0;
   margin: 0 auto;
   background-color: var(--light-red);
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
 
 .tile {

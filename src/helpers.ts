@@ -42,13 +42,13 @@ export function isSolved(tiles: number[]): boolean {
 }
 
 export function getIndex(row: string, col: string): number {
-  return parseInt(row, 10) * constants.GRID_SIZE + parseInt(col, 10);
+  return parseInt(row, 10) * constants.COLUMNS + parseInt(col, 10);
 }
 
 export function getMatrixPosition(index: number): MatrixPosition {
   return {
-    row: Math.floor(index / constants.GRID_SIZE),
-    col: index % constants.GRID_SIZE,
+    row: Math.floor(index / constants.COLUMNS),
+    col: index % constants.COLUMNS,
   };
 }
 
@@ -121,20 +121,20 @@ export function swap(tiles: number[], src: number, dest: number): number[] {
   if (srcPos.row === emptyPos.row) {
     const direction = srcPos.col < emptyPos.col ? 1 : -1;
     for (let i = emptyPos.col; i !== srcPos.col; i -= direction) {
-      const index = emptyPos.row * constants.GRID_SIZE + i;
-      const nextIndex = emptyPos.row * constants.GRID_SIZE + (i - direction);
+      const index = emptyPos.row * constants.COLUMNS + i;
+      const nextIndex = emptyPos.row * constants.COLUMNS + (i - direction);
       tilesResult[index] = tilesResult[nextIndex];
     }
-    tilesResult[emptyPos.row * constants.GRID_SIZE + srcPos.col] =
+    tilesResult[emptyPos.row * constants.COLUMNS + srcPos.col] =
       constants.TILE_COUNT - 1;
   } else if (srcPos.col === emptyPos.col) {
     const direction = srcPos.row < emptyPos.row ? 1 : -1;
     for (let i = emptyPos.row; i !== srcPos.row; i -= direction) {
-      const index = i * constants.GRID_SIZE + emptyPos.col;
-      const nextIndex = (i - direction) * constants.GRID_SIZE + emptyPos.col;
+      const index = i * constants.COLUMNS + emptyPos.col;
+      const nextIndex = (i - direction) * constants.COLUMNS + emptyPos.col;
       tilesResult[index] = tilesResult[nextIndex];
     }
-    tilesResult[srcPos.row * constants.GRID_SIZE + emptyPos.col] =
+    tilesResult[srcPos.row * constants.COLUMNS + emptyPos.col] =
       constants.TILE_COUNT - 1;
   }
 

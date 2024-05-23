@@ -12,8 +12,8 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
   const { tiles, handleTileClick, handleShuffleClick, moves } = useTiles();
 
   const style = {
-    width: constants.BOARD_SIZE,
-    height: constants.BOARD_SIZE,
+    height: constants.BOARD_HEIGHT,
+    width: constants.BOARD_WIDTH,
   };
 
   return (
@@ -27,19 +27,21 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
         Moves: {moves}
       </Typography>
 
-      <ul style={style} className="board">
-        {tiles.map((tile, index) => (
-          <Tile
-            key={tile}
-            index={index}
-            tile={tile}
-            width={constants.TILE_WIDTH}
-            height={constants.TILE_HEIGHT}
-            handleTileClick={handleTileClick}
-            gridSize={constants.GRID_SIZE}
-          />
-        ))}
-      </ul>
+      <div className="board-wrapper">
+        <div style={style} className="board">
+          {tiles.map((tile, index) => (
+            <Tile
+              key={tile}
+              index={index}
+              tile={tile}
+              width={constants.TILE_WIDTH}
+              height={constants.TILE_HEIGHT}
+              handleTileClick={handleTileClick}
+              /* gridSize={constants.COLUMNS} */
+            />
+          ))}
+        </div>
+      </div>
 
       <button onClick={handleShuffleClick}>
         {isSolved(tiles) ? "Play again" : "Reshuffle"}

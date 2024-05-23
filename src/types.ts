@@ -11,10 +11,12 @@ export type BoardState = {
 
 export type Constants = {
   TILE_COUNT: number;
-  GRID_SIZE: number;
-  BOARD_SIZE: number;
+  COLUMNS: number;
+  ROWS: number;
   TILE_WIDTH: number;
   TILE_HEIGHT: number;
+  BOARD_HEIGHT: number;
+  BOARD_WIDTH: number;
 };
 
 export interface HelperFunctions {
