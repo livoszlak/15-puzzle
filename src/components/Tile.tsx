@@ -11,7 +11,7 @@ type TileProps = {
 };
 
 function Tile(props: TileProps) {
-  const { tile, index, width, height, handleTileClick, gridSize } = props;
+  const { tile, index, width, height, handleTileClick } = props;
 
   const { row, col } = getMatrixPosition(index);
   const visualPos = getVisualPosition(row, col, width, height);
@@ -29,13 +29,15 @@ function Tile(props: TileProps) {
         width: tileStyle.width,
         height: tileStyle.height,
         transform: `translate3d(${tileStyle.translateX}px, ${tileStyle.translateY}px, 0)`,
-        opacity: tile === constants.TILE_COUNT - 1 ? 0 : 1,
-        border: "1px solid black",
+        backgroundColor:
+          tile === constants.TILE_COUNT - 1 ? "#242424" : "#747bff",
+        /* opacity: tile === constants.TILE_COUNT - 1 ? 0 : 1, */
+        /* border: "1px solid black", */
       }}
       className="tile"
       onClick={() => handleTileClick(index)}
     >
-      {tile + 1}
+      {tile === constants.TILE_COUNT - 1 ? "" : tile + 1}
     </li>
   );
 }

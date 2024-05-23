@@ -2,7 +2,7 @@ import { Constants } from "../types";
 
 const windowWidth = window.innerWidth;
 const boardSize = Math.round(windowWidth * 0.8);
-const gridSize = 4;
+export const gridSize = 4;
 
 export const constants: Constants = {
   TILE_COUNT: 16,

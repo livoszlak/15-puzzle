@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { constants } from "../constants/constants";
 import { canSwap, swap, shuffle } from "../helpers";
+import { isSolved } from "../helpers";
 
 export function useTiles() {
   const [tiles, setTiles] = useState([...Array(constants.TILE_COUNT).keys()]);
@@ -29,6 +30,7 @@ export function useTiles() {
   const handleTileClick = (index: number): void => {
     swapTiles(index);
     setMoves((prevMoves) => prevMoves + 1);
+    setIsSolved(isSolved(tiles));
   };
 
   const handleShuffleClick = (): void => {
@@ -44,6 +46,13 @@ export function useTiles() {
   useEffect(() => {
     shuffleTiles();
   }, []);
+
+  useEffect(() => {
+    if (solved) {
+      alert(`Congratulations! You solved the puzzle in ${moves} moves.`);
+      handleShuffleClick();
+    }
+  }, [solved]);
 
   return {
     tiles,
