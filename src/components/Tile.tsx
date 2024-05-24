@@ -7,7 +7,6 @@ type TileProps = {
   width: number;
   height: number;
   handleTileClick: (index: number) => void;
-  /* gridSize: number; */
 };
 
 function Tile(props: TileProps) {
@@ -31,8 +30,7 @@ function Tile(props: TileProps) {
         transform: `translate3d(${tileStyle.translateX}px, ${tileStyle.translateY}px, 0)`,
         backgroundColor:
           tile === constants.TILE_COUNT - 1 ? "#242424" : "#747bff",
-        /* opacity: tile === constants.TILE_COUNT - 1 ? 0 : 1, */
-        /* border: "1px solid black", */
+        border: "1px solid #242424",
       }}
       className="tile"
       onClick={() => handleTileClick(index)}
@@ -43,3 +41,17 @@ function Tile(props: TileProps) {
 }
 
 export default Tile;
+
+/**
+ *       <Box
+        sx={{
+          width: 100,
+          height: 100,
+          borderRadius: 1,
+          bgcolor: 'primary.main',
+          '&:hover': {
+            bgcolor: 'primary.dark',
+          },
+        }}
+      />
+ */

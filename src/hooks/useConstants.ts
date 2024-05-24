@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Constants } from "../types";
-import { columns } from "../constants/constants";
+import { columns, rows } from "../constants/constants";
 
 export function useConstants() {
   const [constants, setConstants] = useState<Constants>({
     TILE_COUNT: 16,
     COLUMNS: columns,
-    ROWS: 16 / columns,
+    ROWS: rows,
     TILE_WIDTH: 0,
     TILE_HEIGHT: 0,
     BOARD_HEIGHT: 0,
@@ -27,6 +27,7 @@ export function useConstants() {
         TILE_WIDTH: tileWidth,
         TILE_HEIGHT: tileHeight,
         BOARD_WIDTH: tileWidth * constants.COLUMNS,
+        BOARD_HEIGHT: tileHeight * constants.ROWS,
       }));
     };
 

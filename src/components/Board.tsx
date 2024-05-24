@@ -3,6 +3,7 @@ import { Constants } from "../types";
 import { useTiles } from "../hooks/useTiles";
 import { Typography } from "@mui/material";
 import { isSolved } from "../helpers";
+import Button from "./Button";
 
 interface BoardProps {
   constants: Constants;
@@ -27,25 +28,22 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
         Moves: {moves}
       </Typography>
 
-      <div className="board-wrapper">
-        <div style={style} className="board">
-          {tiles.map((tile, index) => (
-            <Tile
-              key={tile}
-              index={index}
-              tile={tile}
-              width={constants.TILE_WIDTH}
-              height={constants.TILE_HEIGHT}
-              handleTileClick={handleTileClick}
-              /* gridSize={constants.COLUMNS} */
-            />
-          ))}
-        </div>
+      <div style={style} className="board">
+        {tiles.map((tile, index) => (
+          <Tile
+            key={tile}
+            index={index}
+            tile={tile}
+            width={constants.TILE_WIDTH}
+            height={constants.TILE_HEIGHT}
+            handleTileClick={handleTileClick}
+          />
+        ))}
       </div>
 
-      <button onClick={handleShuffleClick}>
+      <Button onClick={handleShuffleClick}>
         {isSolved(tiles) ? "Play again" : "Reshuffle"}
-      </button>
+      </Button>
     </>
   );
 };

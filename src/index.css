@@ -19,6 +19,13 @@
   --blank: #242424;
 }
 
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -26,19 +33,18 @@
 .App {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2rem;
+  height: 100%;
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--light-blue);
-}
-
-.board-wrapper {
 }
 
 .board {
@@ -47,7 +53,6 @@ body {
   margin: 0 auto;
   background-color: var(--light-red);
   display: flex;
-  height: 100%;
   width: 100%;
 }
 
@@ -55,14 +60,30 @@ body {
   position: absolute;
   list-style: none;
   background: var(--purple);
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1rem;
-  box-shadow: inset 0px 0px 0px 2px var(--light-red);
+  /* box-shadow: inset 0px 0px 0px 1px var(--light-red); */
 }
 
 .empty {
   background-color: var(--blank);
+}
+
+.test {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: calc(100%);
+  gap: 0;
+  padding: 0;
+}
+
+.tile-test {
+  width: calc(100% / 6);
+  height: calc(100% / 3);
+  background-color: #747bff;
 }
 
 @media (prefers-color-scheme: light) {
