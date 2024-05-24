@@ -3,9 +3,10 @@ import { Typography } from "@mui/material";
 import Board from "./components/Board";
 import Header from "./components/Header";
 import { useConstants } from "./hooks/useConstants";
+import { Constants } from "./types";
 
 function App() {
-  const constants = useConstants();
+  const constants = useConstants() as Constants;
 
   return (
     <div className="App">

@@ -10,7 +10,7 @@ export function useTiles() {
   const [moves, setMoves] = useState(0);
 
   const shuffleTiles = (): void => {
-    setTiles((tiles) => {
+    setTiles((tiles: number[]) => {
       const shuffledTiles = shuffle([...tiles]);
       return shuffledTiles;
     });
@@ -29,7 +29,7 @@ export function useTiles() {
 
   const handleTileClick = (index: number): void => {
     swapTiles(index);
-    setMoves((prevMoves) => prevMoves + 1);
+    setMoves((prevMoves: number) => prevMoves + 1);
     setIsSolved(isSolved(tiles));
   };
 

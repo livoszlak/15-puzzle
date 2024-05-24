@@ -4,9 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "//": "Below are the descriptions for each script",
+    "// dev": "Starts the development server using Vite",
     "dev": "vite",
+    "// build": "Compiles TypeScript files and builds the project using Vite",
     "build": "tsc && vite build",
+    "// lint": "Runs ESLint on .ts and .tsx files",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "// preview": "Previews the built project using Vite",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -10,7 +10,12 @@ interface BoardProps {
 }
 
 const Board: React.FC<BoardProps> = ({ constants }) => {
-  const { tiles, handleTileClick, handleShuffleClick, moves } = useTiles();
+  const { tiles, handleTileClick, handleShuffleClick, moves } = useTiles() as {
+    tiles: number[];
+    handleTileClick: (index: number) => void;
+    handleShuffleClick: () => void;
+    moves: number;
+  };
 
   const style = {
     height: constants.BOARD_HEIGHT,
