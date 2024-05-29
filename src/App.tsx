@@ -3,8 +3,8 @@ import "./App.css";
 import Board from "./components/Board";
 import Header from "./components/Header";
 import { useConstants } from "./hooks/useConstants";
-import { constants } from "./constants/constants";
-import { Constants } from "./types";
+/* import { constants } from "./constants/constants";
+import { Constants } from "./types"; */
 
 function App() {
   const constants = useConstants();

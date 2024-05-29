@@ -78,9 +78,9 @@ export const canSwap = (src: number, dest: number): boolean => {
   return srcPos.row === destPos.row || srcPos.col === destPos.col;
 };
 
-export function swap(tiles: number[], src: number, dest: number): number[] {
+export function swap(tiles: number[], src: number, _dest: number): number[] {
   const srcPos: MatrixPosition = getMatrixPosition(src);
-  const destPos: MatrixPosition = getMatrixPosition(dest);
+  /* const destPos: MatrixPosition = getMatrixPosition(_dest); */
   const emptyTile = tiles.indexOf(constants.TILE_COUNT - 1);
   const emptyPos = getMatrixPosition(emptyTile);
 
