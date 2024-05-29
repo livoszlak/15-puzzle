@@ -58,7 +58,8 @@ body {
   margin: 0 auto;
   background-color: var(--tile-hover);
   display: flex;
-  width: 100%;
+  width: auto;
+  height: auto;
 }
 
 .tile {

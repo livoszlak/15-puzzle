@@ -3,39 +3,44 @@ import { Constants } from "../types";
 import { columns, rows } from "../constants/constants";
 
 export function useConstants() {
-  const [constants, setConstants] = useState<Constants>({
-    TILE_COUNT: 16,
-    COLUMNS: columns,
-    ROWS: rows,
-    TILE_WIDTH: 0,
-    TILE_HEIGHT: 0,
-    BOARD_HEIGHT: 0,
-    BOARD_WIDTH: 0,
-  });
+  const calculateConstants = () => {
+    const windowWidth = window.innerWidth;
+    const maxTileSize = 100;
+
+    let tileWidth: number = Math.min(
+      (windowWidth * 0.8) / columns,
+      maxTileSize
+    );
+    let tileHeight: number = tileWidth;
+
+    let boardWidth: number = tileWidth * columns;
+    let boardHeight: number = tileHeight * rows;
+
+    const tiles: number = 16;
+    const tilesPerColumn: number = Math.ceil(tiles / columns);
+    boardHeight = tileHeight * tilesPerColumn;
+
+    return {
+      TILE_COUNT: tiles,
+      COLUMNS: columns,
+      ROWS: rows,
+      TILE_WIDTH: tileWidth,
+      TILE_HEIGHT: tileHeight,
+      BOARD_WIDTH: boardWidth,
+      BOARD_HEIGHT: boardHeight,
+    };
+  };
+
+  const [constants, setConstants] = useState<Constants>(calculateConstants());
 
   useEffect(() => {
     const handleResize = () => {
-      const windowWidth = window.innerWidth;
-      const tileWidth = Math.min(
-        Math.round((windowWidth * 0.8) / constants.COLUMNS),
-        100
-      );
-      const tileHeight = tileWidth;
-
-      setConstants((prevConstants) => ({
-        ...prevConstants,
-        TILE_WIDTH: tileWidth,
-        TILE_HEIGHT: tileHeight,
-        BOARD_WIDTH: tileWidth * constants.COLUMNS,
-        BOARD_HEIGHT: tileHeight * constants.ROWS,
-      }));
+      setConstants(calculateConstants());
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
-  }, [constants.COLUMNS]);
+  }, []);
 
   return constants;
 }
