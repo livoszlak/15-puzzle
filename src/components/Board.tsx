@@ -30,9 +30,15 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   };
 
-  const style = {
+  /*   const style = {
     height: constants.BOARD_HEIGHT,
     width: constants.BOARD_WIDTH,
+    borderRadius: "15px",
+  }; */
+
+  const style = {
+    height: `${constants.BOARD_HEIGHT}px`,
+    width: `${constants.BOARD_WIDTH}px`,
     borderRadius: "15px",
   };
 
