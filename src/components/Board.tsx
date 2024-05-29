@@ -17,7 +17,7 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
     moves,
     showModal,
     setShowModal,
-    solved,
+    /* solved, */
     setIsSolved,
   } = useTiles() as {
     tiles: number[];
