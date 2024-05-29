@@ -1,16 +1,22 @@
 import { Box, Typography } from "@mui/material";
-import { useTiles } from "../hooks/useTiles";
-import { useState } from "react";
 
 export default function Header() {
-  const [moves, setMoves] = useState(0);
   return (
-    <Box>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       <Typography
-        variant="h5"
+        variant="h1"
+        fontSize={"3rem"}
+        fontFamily={"Open Sans"}
+        sx={{ fontWeight: "800", color: "#0066cc" }}
+      >
+        15-puzzle
+      </Typography>
+      <Typography
+        variant="overline"
         fontSize={"1rem"}
         fontFamily={"Open Sans"}
-        sx={{ fontWeight: "400" }}
+        sx={{ fontWeight: "500", color: "#0066cc", lineHeight: "20px" }}
+        paragraph={true}
       >
         How few moves can you solve the puzzle in?
       </Typography>

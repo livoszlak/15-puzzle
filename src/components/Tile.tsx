@@ -19,6 +19,7 @@ type TileStyle = {
 function Tile({ tile, index, width, height, handleTileClick }: TileProps) {
   const { row, col } = getMatrixPosition(index);
   const visualPos = getVisualPosition(row, col, width, height);
+  const tileClass = tile === constants.TILE_COUNT - 1 ? "tile empty" : "tile";
 
   const tileStyle: TileStyle = {
     width: `${constants.TILE_WIDTH}px`,
@@ -31,29 +32,20 @@ function Tile({ tile, index, width, height, handleTileClick }: TileProps) {
     width: tileStyle.width,
     height: tileStyle.height,
     transform: `translate3d(${tileStyle.translateX}px, ${tileStyle.translateY}px, 0)`,
-    backgroundColor: tile === constants.TILE_COUNT - 1 ? "#242424" : "#747bff",
     border: "1px solid #242424",
+    borderRadius: "15px",
+    transition: "transform 0.1s ease-out",
   };
 
   return (
-    <div style={style} className="tile" onClick={() => handleTileClick(index)}>
+    <div
+      style={style}
+      className={tileClass}
+      onClick={() => handleTileClick(index)}
+    >
       {tile === constants.TILE_COUNT - 1 ? "" : tile + 1}
     </div>
   );
 }
 
 export default Tile;
-
-/**
- *       <Box
-        sx={{
-          width: 100,
-          height: 100,
-          borderRadius: 1,
-          bgcolor: 'primary.main',
-          '&:hover': {
-            bgcolor: 'primary.dark',
-          },
-        }}
-      />
- */

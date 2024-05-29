@@ -10,16 +10,6 @@ interface VisualPosition {
   y: number;
 }
 
-/* export function isSolvable(tiles: number[]): boolean {
-  let product: number = 1;
-  for (let i = 1, l = constants.TILE_COUNT - 1; i <= l; i++) {
-    for (let j = i + 1, m = l + 1; j <= m; j++) {
-      product *= (tiles[i - 1] - tiles[j - 1]) / (i - j);
-    }
-  }
-  return Math.round(product) === 1;
-} */
-
 export function isSolvable(tiles: number[]): boolean {
   let invCount = 0;
   for (let i = 0; i < constants.TILE_COUNT - 1; i++) {
@@ -64,18 +54,6 @@ export function getVisualPosition(
   };
 }
 
-/* export function shuffle(tiles: number[]): number[] {
-  const shuffledTiles = [
-    ...tiles
-      .filter((t) => t !== tiles.length - 1)
-      .sort(() => Math.random() - 0.5),
-    tiles.length - 1,
-  ];
-  return isSolvable(shuffledTiles) && !isSolved(shuffledTiles)
-    ? shuffledTiles
-    : shuffle(shuffledTiles);
-} */
-
 export function shuffle(tiles: number[]): number[] {
   let array = [...tiles];
   let currentIndex = array.length,
@@ -93,16 +71,6 @@ export function shuffle(tiles: number[]): number[] {
 
   return isSolvable(array) && !isSolved(array) ? array : shuffle(array);
 }
-
-/* export function canSwap(src: number, dest: number) {
-  let { row: srcRow, col: srcCol } = getMatrixPosition(src);
-  console.log("src:" + src);
-
-  let { row: destRow, col: destCol } = getMatrixPosition(dest);
-  console.log("dest:" + dest);
-
-  return Math.abs(srcRow - destRow) + Math.abs(srcCol - destCol) === 1;
-} */
 
 export const canSwap = (src: number, dest: number): boolean => {
   const srcPos = getMatrixPosition(src);

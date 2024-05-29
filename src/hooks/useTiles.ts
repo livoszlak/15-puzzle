@@ -4,10 +4,12 @@ import { canSwap, swap, shuffle } from "../helpers";
 import { isSolved } from "../helpers";
 
 export function useTiles() {
-  const [tiles, setTiles] = useState([...Array(constants.TILE_COUNT).keys()]);
+  const initialTiles = shuffle([...Array(constants.TILE_COUNT).keys()]);
+  const [tiles, setTiles] = useState(initialTiles);
   const [solved, setIsSolved] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
   const [moves, setMoves] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const shuffleTiles = (): void => {
     setTiles((tiles: number[]) => {
@@ -30,7 +32,7 @@ export function useTiles() {
   const handleTileClick = (index: number): void => {
     swapTiles(index);
     setMoves((prevMoves: number) => prevMoves + 1);
-    setIsSolved(isSolved(tiles));
+    /* setIsSolved(isSolved(tiles)); */
   };
 
   const handleShuffleClick = (): void => {
@@ -49,16 +51,22 @@ export function useTiles() {
 
   useEffect(() => {
     if (solved) {
-      alert(`Congratulations! You solved the puzzle in ${moves} moves.`);
-      handleShuffleClick();
+      setShowModal(true);
     }
   }, [solved]);
+
+  useEffect(() => {
+    setIsSolved(isSolved(tiles));
+  }, [tiles]);
 
   return {
     tiles,
     solved,
+    setIsSolved,
     isStarted,
     moves,
+    showModal,
+    setShowModal,
     handleTileClick,
     handleShuffleClick,
     handleStartClick,

@@ -1,7 +1,7 @@
 import { Constants } from "../types";
 
 const windowWidth = window.innerWidth;
-const boardSize = Math.round(windowWidth * 0.8);
+/* const boardSize = Math.round(windowWidth * 0.8); */
 export const columns = 4;
 export const rows = 4;
 

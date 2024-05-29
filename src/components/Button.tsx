@@ -3,7 +3,7 @@ import { ButtonProps } from "../types";
 
 const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
   return (
-    <MUIButton variant="contained" onClick={onClick} sx={{ width: "120px" }}>
+    <MUIButton variant="contained" onClick={onClick}>
       {children}
     </MUIButton>
   );
