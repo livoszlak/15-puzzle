@@ -1,8 +1,8 @@
 import { Constants } from "../types";
 
-const windowWidth = window.innerWidth;
-export const columns = 4;
-export const rows = 2;
+const windowWidth: number = window.innerWidth;
+export const columns: number = 4;
+export const rows: number = 4;
 
 export const constants: Constants = {
   TILE_COUNT: 16,

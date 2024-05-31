@@ -1,4 +1,5 @@
 import { constants } from "./constants/constants";
+import { Constants } from "./types";
 
 interface MatrixPosition {
   row: number;
@@ -10,8 +11,9 @@ interface VisualPosition {
   y: number;
 }
 
-export function isSolvable(tiles: number[]): boolean {
+export function isSolvable(tiles: number[], constants: Constants): boolean {
   let invCount = 0;
+
   for (let i = 0; i < constants.TILE_COUNT - 1; i++) {
     for (let j = i + 1; j < constants.TILE_COUNT; j++) {
       if (tiles[j] && tiles[i] && tiles[i] > tiles[j]) {
@@ -19,7 +21,18 @@ export function isSolvable(tiles: number[]): boolean {
       }
     }
   }
-  return invCount % 2 === 0;
+
+  const blankRow = Math.floor(tiles.indexOf(0) / constants.COLUMNS);
+
+  if (constants.COLUMNS % 2 !== 0) {
+    return invCount % 2 === 0;
+  } else {
+    if (blankRow % 2 === 0) {
+      return invCount % 2 !== 0;
+    } else {
+      return invCount % 2 === 0;
+    }
+  }
 }
 
 export function isSolved(tiles: number[]): boolean {
@@ -56,9 +69,9 @@ export function getVisualPosition(
 
 export function shuffle(tiles: number[]): number[] {
   let array = [...tiles];
-  let currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
+  let currentIndex: number = array.length,
+    temporaryValue: number,
+    randomIndex: number;
 
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -69,7 +82,9 @@ export function shuffle(tiles: number[]): number[] {
     array[randomIndex] = temporaryValue;
   }
 
-  return isSolvable(array) && !isSolved(array) ? array : shuffle(array);
+  return isSolvable(array, constants) && !isSolved(array)
+    ? array
+    : shuffle(array);
 }
 
 export const canSwap = (src: number, dest: number): boolean => {
