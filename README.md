@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# 15-Puzzle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple 15-puzzle game implemented using React and TypeScript. It uses components from the MUI Material library. Row and column count can be set in the **src/constants/constants.ts** file. The puzzle supports any combination of row and column count which can accomodate 16 tiles.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone the repository with `git clone https://github.com/livoszlak/15-puzzle`
+2. Navigate to the project directory with `cd 15-puzzle`
+3. Install dependencies with `npm install`
 
-## Expanding the ESLint configuration
+### Tangible room for improvement
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The tiles are placed on the board using absolute positioning, which made sense when I started the project but also means that the tiles won't expand or shrink dynamically in size with the board component if the browser width changes. However, the puzzle still works from mobile up to desktop on browser refresh, so it will have to do for now.
 
-- Configure the top-level `parserOptions` property like this:
+### Dependencies
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- @emotion/react ^11.11.4
+- @emotion/styled ^11.11.5
+- @mui/material ^5.15.18
+- framer-motion ^11.2.5
+- react ^18.2.0
+- react-dom ^18.2.0
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Dev dependencies
+
+- @types/react ^18.2.66
+- @types/react-dom ^18.2.22
+- @typescript-eslint/eslint-plugin ^7.2.0
+- @typescript-eslint/parser ^7.2.0
+- @vitejs/plugin-react-swc ^3.5.0
+- eslint ^8.57.0
+- eslint-plugin-react-hooks ^4.6.0
+- eslint-plugin-react-refresh ^0.4.6
+- typescript ^5.2.2
+- vite ^5.2.0
+
+### Scripts
+
+`dev` Starts the development server using Vite
+`build` Compiles TypeScript files and builds the project using Vite
+`lint` Runs ESLint on .ts and .tsx files
+`preview` Previews the built project using Vite
