@@ -8,10 +8,6 @@ This is a simple 15-puzzle game implemented using React and TypeScript. It uses 
 2. Navigate to the project directory with `cd 15-puzzle`
 3. Install dependencies with `npm install`
 
-### Tangible room for improvement
-
-The tiles are placed on the board using absolute positioning, which made sense when I started the project but also means that the tiles won't expand or shrink dynamically in size with the board component if the browser width changes. However, the puzzle still works from mobile up to desktop on browser refresh, so it will have to do for now.
-
 ### Dependencies
 
 - @emotion/react ^11.11.4
@@ -36,7 +32,11 @@ The tiles are placed on the board using absolute positioning, which made sense w
 
 ### Scripts
 
-`dev` Starts the development server using Vite
-`build` Compiles TypeScript files and builds the project using Vite
-`lint` Runs ESLint on .ts and .tsx files
-`preview` Previews the built project using Vite
+- `dev` Starts the development server using Vite
+- `build` Compiles TypeScript files and builds the project using Vite
+- `lint` Runs ESLint on .ts and .tsx files
+- `preview` Previews the built project using Vite
+
+### Tangible room for improvement
+
+The tiles are placed on the board using absolute positioning, which made sense when I started the project but also means that the tiles won't expand or shrink dynamically in size with the board component if the browser width changes. However, the puzzle still works from mobile up to desktop on browser refresh, so it will have to do for now.
