@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Constants } from "../types";
 import { columns, rows } from "../constants/constants";
 
-export function useConstants() {
+export function useConstants(): Constants {
   const calculateConstants = () => {
     const windowWidth = window.innerWidth;
     const maxTileSize = 100;

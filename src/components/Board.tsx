@@ -2,7 +2,7 @@ import Tile from "./Tile";
 import { Constants } from "../types";
 import { useTiles } from "../hooks/useTiles";
 import { Typography, Box } from "@mui/material";
-import { isSolved } from "../helpers";
+/* import { isSolved } from "../helpers"; */
 import Button from "./Button";
 
 interface BoardProps {
@@ -17,8 +17,8 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
     moves,
     showModal,
     setShowModal,
-    /* solved, */
     setIsSolved,
+    /*isSolved*/
   } = useTiles() as {
     tiles: number[];
     handleTileClick: (index: number) => void;
@@ -29,12 +29,6 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
     setIsSolved: React.Dispatch<React.SetStateAction<boolean>>;
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   };
-
-  /*   const style = {
-    height: constants.BOARD_HEIGHT,
-    width: constants.BOARD_WIDTH,
-    borderRadius: "15px",
-  }; */
 
   const style = {
     height: `${constants.BOARD_HEIGHT}px`,
@@ -66,9 +60,7 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
         ))}
       </div>
 
-      <Button onClick={handleShuffleClick}>
-        {isSolved(tiles) ? "Play again" : "Reshuffle"}
-      </Button>
+      <Button onClick={handleShuffleClick}>Reshuffle</Button>
 
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -81,7 +73,9 @@ const Board: React.FC<BoardProps> = ({ constants }) => {
         >
           Set puzzle as solved
         </Button>
-        <Typography variant="overline">(for dev testing purposes!)</Typography>
+        <Typography variant="overline" sx={{ fontFamily: "Open Sans" }}>
+          (for dev testing purposes!)
+        </Typography>
       </Box>
 
       {showModal && <div className="overlay"></div>}

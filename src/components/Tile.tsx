@@ -9,31 +9,32 @@ type TileProps = {
   handleTileClick: (index: number) => void;
 };
 
-type TileStyle = {
-  width: string;
-  height: string;
-  translateX: number;
-  translateY: number;
-};
-
 function Tile({ tile, index, width, height, handleTileClick }: TileProps) {
   const { row, col } = getMatrixPosition(index);
   const visualPos = getVisualPosition(row, col, width, height);
   const tileClass = tile === constants.TILE_COUNT - 1 ? "tile empty" : "tile";
 
-  const tileStyle: TileStyle = {
-    width: `${constants.TILE_WIDTH}px`,
-    height: `${constants.TILE_HEIGHT}px`,
-    translateX: visualPos.x,
-    translateY: visualPos.y,
-  };
+  let borderRadius: string;
+  switch (constants.COLUMNS) {
+    case 5:
+    case 6:
+      borderRadius = "5px";
+      break;
+    default:
+      if (constants.COLUMNS > 6) {
+        borderRadius = "3px";
+      } else if (constants.COLUMNS === 4 || constants.COLUMNS < 4) {
+        borderRadius = "8px";
+      }
+      break;
+  }
 
   const style: React.CSSProperties = {
-    width: tileStyle.width,
-    height: tileStyle.height,
-    transform: `translate3d(${tileStyle.translateX}px, ${tileStyle.translateY}px, 0)`,
+    width: `${constants.TILE_WIDTH}px`,
+    height: `${constants.TILE_HEIGHT}px`,
+    transform: `translate3d(${visualPos.x}px, ${visualPos.y}px, 0)`,
     border: "1px solid #242424",
-    borderRadius: "15px",
+    borderRadius: borderRadius,
     transition: "transform 0.1s ease-out",
   };
 

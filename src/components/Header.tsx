@@ -1,8 +1,11 @@
 import { Box, Typography } from "@mui/material";
 
-export default function Header() {
+export default function Header(): JSX.Element {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <Box
+      component="header"
+      sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+    >
       <Typography
         variant="h1"
         fontSize={"3rem"}

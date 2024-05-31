@@ -19,11 +19,11 @@ export type Constants = {
   BOARD_WIDTH: number;
 };
 
-export interface HelperFunctions {
+/* export interface HelperFunctions {
   canSwap: (tile1: number, tile2: number) => boolean;
   swap: (tile1: number, tile2: number) => void;
   shuffle: () => void;
-}
+} */
 
 export interface ButtonProps {
   onClick: () => void;
