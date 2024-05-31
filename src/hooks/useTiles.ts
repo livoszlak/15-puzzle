@@ -18,7 +18,7 @@ export function useTiles() {
     });
   };
 
-  const swapTiles = (tileIndex: number): void => {
+  const swapTiles = (tileIndex: number): boolean => {
     if (canSwap(tileIndex, tiles.indexOf(tiles.length - 1))) {
       const swappedTiles: number[] = swap(
         tiles,
@@ -26,12 +26,16 @@ export function useTiles() {
         tiles.indexOf(tiles.length - 1)
       );
       setTiles(swappedTiles);
+      return true;
     }
+    return false;
   };
 
   const handleTileClick = (index: number): void => {
-    swapTiles(index);
-    setMoves((prevMoves: number) => prevMoves + 1);
+    const didSwap = swapTiles(index);
+    if (didSwap) {
+      setMoves((prevMoves: number) => prevMoves + 1);
+    }
     /* setIsSolved(isSolved(tiles)); */
   };
 
